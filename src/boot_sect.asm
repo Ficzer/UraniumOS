@@ -1,35 +1,26 @@
 
 mov ah, 0x0e ; tty mode
-mov al, 'U'
+
+mov al, '1'
 int 0x10
-mov al, 'r'
+mov al, the_secret
 int 0x10
-mov al, 'a'
+
+mov al, '2'
 int 0x10
-mov al, 'n'
+mov al, [the_secret]
 int 0x10
-mov al, 'i'
+
+mov al, '3'
 int 0x10
-mov al, 'u'
+mov al, [the_secret + 0x7c00]
 int 0x10
-mov al, 'm'
-int 0x10
-mov al, 'B'
-int 0x10
-mov al, 'L'
-int 0x10
-mov al, '-'
-int 0x10
-mov al, 'H'
-int 0x10
-mov al, 'e'
-int 0x10
-mov al, 'l'
-int 0x10
-int 0x10
-mov al, 'o'
+
 
 jmp $ ; jump to current, adress infinite loop
+
+the_secret:
+	db "X"
 	
 ; fill with 510 zeros - the size of previous code
 times 510-($-$$) db 0
